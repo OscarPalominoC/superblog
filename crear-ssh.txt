@@ -48,4 +48,14 @@ CONEXIÓN A GITHUB CON SSH.
 8. vas a la carpeta del repositorio local.
 9. Tecleas git remote -v, verás el origin y la URL de este; el paso a seguir es cambiar la URL.
 10. Usa de nuevo git remote -v, si ves que la URL cambió, lo hiciste perfectamente.
-11. Prueba los cambios haciendo un commit y un pull a Github.
+11. Trae el repositorio completo con GIT pull. Aparecerá una advertencia.
+The authenticity of host 'github.com (192.30.253.113)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+teclean yes.
+12. Teclean git pull origin master, esto con el fin de fusionar el proyecto en github con el master local.
+13. Usar git status.
+14. Hacen un Commit.
+15. Usan git pull origin master.
+16. Luego git push origin master.
+17. Revisan que los cambios se hayan realizado y listo! Configurada la llave SSH en Github. Y ya no pedirá más la contraseña.
