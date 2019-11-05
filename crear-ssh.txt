@@ -1,0 +1,51 @@
+1. Estar en la carpeta home de tu sistema. c/Users/Oscar Palomino
+2. Teclear el comando ssh-keygen -t rsa -b 4096 -C "ing.oscarp1@gmail.com"
+OJO! el correo que configures acá tiene que ser el mismo que el de Github.
+3. Muestra lo siguiente.
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/Oscar Palomino/.ssh/id_rsa):
+Created directory '/c/Users/Oscar Palomino/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/Oscar Palomino/.ssh/id_rsa.
+Your public key has been saved in /c/Users/Oscar Palomino/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:TcKLjZGos8LAOuBV0WQclpxwT9+uKP9AvsF7cQPiASo ing.oscarp1@gmail.com
+The key's randomart image is:
++---[RSA 4096]----+
+|     o**+.       |
+|     .=Xo . .    |
+|    ..+ +... .   |
+|.  E.. = B ..    |
+|o.o.. o S.+ ..   |
+|* .o    +....o   |
+|+o.    . * .o .  |
+| o      o =.     |
+|         +o.     |
++----[SHA256]-----+
+4. El passphrase es una contraseña encima de la llave SSH.
+id_rsa es la llave privada, con esta llave pueden hackear tu cuenta de github, NUNCA la enseñes.
+id_rsa.pub es la llave pública, puedes enseñarla.
+5. Evalúa que el proceso SSH esté corriendo con el siguiente comando:
+eval $(ssh-agent -s)
+Si muestra Agent pid "número aleatorio" significa que todo está bien.
+6. Teclea el siguiente comando:
+ssh-add ~/.ssh/id_rsa
+Esto añadirá la llave, te pedirá la contraseña si la pusiste.
+Mostrará lo siguiente:
+Enter passphrase for /c/Users/Oscar Palomino/.ssh/id_rsa:
+Identity added: /c/Users/Oscar Palomino/.ssh/id_rsa (ing.oscarp1@gmail.com)
+Y listo, has creado una llave pública y privada.
+
+CONEXIÓN A GITHUB CON SSH.
+1. Copia tu llave pública y en tu perfil de Github ve a settings.
+2. Ve a SSH and GPG keys.
+3. Clic a New SSH key.
+4. Le das un nombre en Title.
+5. Pegas el contenido de la llave en el recuadro Key.
+6. Guardas.
+7. Ubicado en el repositorio que quieres trabajar, le das clic a Clone Repository y luego a USE SSH. Copias el contenido del recuadro y vas al entorno local (simbolo del sistema).
+8. vas a la carpeta del repositorio local.
+9. Tecleas git remote -v, verás el origin y la URL de este; el paso a seguir es cambiar la URL.
+10. Usa de nuevo git remote -v, si ves que la URL cambió, lo hiciste perfectamente.
+11. Prueba los cambios haciendo un commit y un pull a Github.
