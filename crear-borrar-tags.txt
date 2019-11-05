@@ -1,0 +1,18 @@
+﻿CREAR TAGS.
+1. Crear un alias en la línea de comandos con el siguiente comando.
+alias nombreAlias="git log --all --graph --decorate --oneline".
+2. Seleccionar el hash del commit.
+3. Crear el tag. Así:
+ git tag -a v0.1 -m "Añadidos los pasos de SSH" 4a78230
+ 4. Verificar con "git tag" y "git show-ref --tags".
+ 5. Hacer git pull origin master.
+ 6. Enviar con "git push origin --tags".
+ 7. Actualizar github y en el boton branches aparecerá una nueva opción llamada tags.
+
+ BORRAR TAGS.
+ 1. Dígamos tienes el tag dormido. Tecleas el comando
+ git tag -d dormido
+ 2. haces git pull origin master
+ 3. envías git push origin --tags, pero esto no borrará el tag.
+ El paso que debes hacer es git push origin :refs/tags/dormido.
+ 4. Con esto has borrado el tag no deseado.
