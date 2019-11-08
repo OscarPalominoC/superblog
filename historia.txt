@@ -21,3 +21,4 @@ Experimento 2.
 
 Creado por el dedicado Oscar.
 Experimenta mucho con GIT de la mano con el instructor Freddy Vega.
+El curso de Git y Github está disponible para todas las edades.
