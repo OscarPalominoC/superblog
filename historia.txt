@@ -10,3 +10,5 @@ hoy hablaremos de su vida y sus sueños.
 Desea ser el mejor maestro de todo el mundo.
 
 La práctica de hoy será aprender a hacer un rebase. Master 1.
+
+Master 2.
