@@ -20,3 +20,4 @@ Experimento 1.
 Experimento 2.
 
 Creado por el dedicado Oscar.
+Experimenta mucho con GIT de la mano con el instructor Freddy Vega.
