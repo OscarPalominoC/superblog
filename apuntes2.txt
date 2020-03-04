@@ -1,0 +1,167 @@
+git config --list: Configuración por defecto de git y las cosas que le hacen falta.
+git config --list --origin: Muestra el origen de dónde se almacena las configuraciones.
+git config --global user.name "Oscar Palomino": Cambia la configuración del nombre del usuario de Git.
+git config --global user.email "ing.oscarp1@gmail.com": Cambia la configuración del email del usuario de Git.
+git init: Inicia el repositorio.
+git status: trackea los archivos que se crean y verifica con la base de datos de git si estan en staging o están untracked.
+git add "nombre del archivo": manda el archivo que estás trabajando al staging, es decir, lo mandas al seguimiento para luego hacer commit.
+git add . : manda todos los archivos untrackeados al área de staging.
+git rm --cached "nombre archivo": Untrackea al archivo seleccionado.
+git rm --force: Elimina los archivos de Git y del disco duro. Git siempre guarda todo, por lo que podemos acceder al registro de la existencia de los archivos, de modo que podremos recuperarlos si es necesario (pero debemos usar comandos más avanzados).
+git commit -m "mensaje": Actualiza el repositorio, le da un nuevo estado, los trackea en el repositorio. Cada commit es una nueva versión de cambios del o los archivos al repositorio.
+git log: Muestra la historia de todos los commits.
+git show "nombre del archivo": Muestra los cambios que se le han hecho a los archivos.
+git diff "hash de un commit" "hash de otro commit": compara los cambios entre los 2 commit.
+git reset "hash de un commit" --hard: Vuelve TODO al estado anterior del commit al que pertenece el hash. Es peligroso, porque borra todo lo que hicieron después de ese commit.
+git reset "hash de un commit" --soft: El directorio de trabajo vuelve a la versión anterior, PERO, lo que se lleva trabajado no se pierde, sino que se queda en staging.
+git reset HEAD: Este es el comando para sacar archivos del área de Staging. No para borrarlos ni nada de eso, solo para que los últimos cambios de estos archivos no se envíen al último commit, a menos que cambiemos de opinión y los incluyamos de nuevo en staging con git add, por supuesto.
+git log --stat: Muestra los cambios que se han hecho y la cantidad bytes que han cambiado. Si la lista es muy larga, se puede trasladar con las fechas y salir con la letra Q.
+
+Ramas. Copiar una versión actual o posterior y le pone un nombre, es totalmete diferente en contenido a la versión actual.
+Si hay un bug en la rama actual, es buena práctica hacer una nueva rama comunmente llamada hotfix para hacer los arreglos. Una vez arreglada, se hace un merge para unirla a la rama actual y arreglar el bug.
+Es posible que haya conflictos cuando se hace un merge, es posible arreglarlos, pero para eso hay que verificar los cambios.
+Las ramas son la forma de hacer cambios en nuestro proyecto sin afectar el flujo de trabajo de la rama principal. Esto porque queremos trabajar una parte muy específica de la aplicación o simplemente experimentar.
+La cabecera o HEAD representan la rama y el commit de esa rama donde estamos trabajando. Por defecto, esta cabecera aparecerá en el último commit de nuestra rama principal. Pero podemos cambiarlo al crear una rama (git branch rama, git checkout -b rama) o movernos en el tiempo a cualquier otro commit de cualquier otra rama con los comandos (git reset id-commit, git checkout rama-o-id-commit).
+
+git branch "nombre de la rama": Crea una rama del proyecto en donde apunta el Head. Ej: git branch Header.
+git checkout "nombre de la rama": Es la forma en la que podemos movernos entre ramas. Obviamente si trabajamos en una rama y de repente decidimos movernos al master, al hacer checkout no veremos los cambios realizados a la rama en la que trabajamos, ¿por qué? Porque al trabajar en una rama distinta se crea un registro de cambios diferente al que se lleva en la rama master, para poder visualizar otra vez los cambios que llevabamos en la rama en la que trabajamos, volvemos a hacer checkout y listo. Para poder fusionar los cambios usamos merge.
+MERGE: Sirve para fusionar 2 ramas, si quiero llevar los cambios a la rama master, PRIMERO debo de estar en la rama master y utilizar el comando git merge.
+git merge "nombre de la rama": Fusiona los cambios entre 2 ramas. Se debe hacer un comentario o mensaje, si hay conflictos se deben de revisar y solucionar. Una vez solucionadas se debe hacer un commit para dar por terminado el merge.
+
+GITHUB.
+Es un sistema de control de versiones online. Hace lo mismo que GIT pero en internet. Tiene su propio entorno visual que puede ser instalado en tu computador en windows y mac, en linux aún no han hecho una distribución oficial, pero un usuario clonó el repositorio y compiló una solución para linux; la pueden descargar en: https://github.com/shiftkey/desktop/releases/
+Podemos configurar Git para que trabaje en un repositorio remoto en Github de la siguiente manera.
+Primero, debemos tener creado el repositorio en github, se puede hacer de 2 formas, con http o con ssh.
+Con Http:
+Copiamos la dirección del proyecto que aparece en el botón "clone or download".
+Ahora, en la consola escribimos git remote add origin "url"
+probar git remote y git remote -v, debe aparecer fetch y push.
+Para enviar el proyecto a github usamos git push origin master.
+Si aparece el indicador para que inicies sesión en github hazlo.
+Se hizo un error a propósito, debió aparecer un error, ¿por qué? porque el repositorio remoto tiene su propia rama master, primero se debe invocar la rama master del remoto al local (pull), luego sí se puede hacer push para enviar el repositorio local al remoto. Como buena práctica, siempre se debe hacer pull y después push.
+git pull origin master: invoca el master remoto al master local. Si es la primera vez que se ejecuta este comando aparecerá un error, y es porque son repositorios diferentes, no tienen historias en común, para resolverlo se ejecuta el siguiente comando:
+git pull origin master --allow-unrelated-histories: Resuelve el error que aparece al fusionar un repositorio remoto al repositorio local.
+git push origin master: Envía los datos de mi repositorio local al repositorio remoto.
+SSH - Llaves Públicas y Privadas.
+Las llaves públicas y privadas nos ayudan a cifrar y descifrar nuestros archivos de forma que los podamos compartir archivos sin correr el riesgo de que sean interceptados por personas con malas intenciones.
+La forma de hacerlo es la siguiente:
+* Ambas personas deben crear su llave pública y privada.
+* Ambas personas pueden compartir su llave pública a las otras partes (recuerda que esta llave es pública, no hay problema si la “interceptan”).
+*  La persona que quiere compartir un mensaje puede usar la llave pública de la otra persona para cifrar los archivos y asegurarse que solo puedan ser descifrados con la llave privada de la persona con la que queremos compartir el mensaje.
+* El mensaje está cifrado y puede ser enviado a la otra persona sin problemas en caso de que los archivos sean interceptados.
+* La persona a la que enviamos el mensaje cifrado puede usar su llave privada para descifrar el mensaje y ver los archivos.
+Puedes compartir tu llave pública pero nunca tu llave privada.pri
+
+Configura tus llaves SSH en local
+Primer paso: Generar tus llaves SSH. Recuerda que es muy buena idea proteger tu llave privada con una contraseña.
+
+ssh-keygen -t rsa -b 4096 -C "tu@email.com"
+Segundo paso: Terminar de configurar nuestro sistema.
+
+En Windows y Linux:
+
+# Encender el "servidor" de llaves SSH de tu computadora:
+eval $(ssh-agent -s)
+
+# Añadir tu llave SSH a este "servidor":
+ssh-add ruta-donde-guardaste-tu-llave-privada
+
+En Mac:
+# Encender el "servidor" de llaves SSH de tu computadora:
+eval "$(ssh-agent -s)"
+
+# Si usas una versión de OSX superior a Mac Sierra (v10.12)
+# debes crear o modificar un archivo "config" en la carpeta
+# de tu usuario con el siguiente contenido (ten cuidado con
+# las mayúsculas):
+Host *
+        AddKeysToAgent yes
+        UseKeychain yes
+        IdentityFile ruta-donde-guardaste-tu-llave-privada
+
+# Añadir tu llave SSH al "servidor" de llaves SSH de tu
+# computadora (en caso de error puedes ejecutar este
+# mismo comando pero sin el argumento -K):
+ssh-add -K ruta-donde-guardaste-tu-llave-privada
+
+Ahora, para guardar la llave pública en GitHub, primero copiamos el contenido de la llave pública, luego debemos ir a Github.com, settings, darle clic a "SSH and GPG keys", darle clic a "New SSH key", darle nombre y pegar el contenido de la llave pública.
+
+Configurar repositorio remoto con llave SSH.
+Entramos al proyecto, en el botón "clone or download" copiamos el enlace SSH.
+En el bash, ubicado en la carpeta de nuestro repositorio escribimos el siguiente comando:
+git remote set-url origin "url ssh copiada" (sin comillas).
+Se hace pull para confirmar.
+git pull origin master.
+Se hace commit local de los cambios.
+nuevamente pull
+y por último, para enviar los datos se hace push: git push origin master.
+
+
+TAGS Y VERSIONES.
+Los tags o etiquetas nos permiten asignar versiones a los commits con cambios más importantes o significativos de nuestro proyecto.
+
+COMANDO PARA VER LA HISTORIA DEL LOG DE FORMA GRÁFICA Y ORDENADA.
+git log --all --graph --decorate --oneline
+
+CREAR ALIAS.
+1. Crear un alias en la línea de comandos con el siguiente comando.
+alias nombreAlias="git log --all --graph --decorate --oneline".
+
+CREAR TAGS
+1. Seleccionar el hash del commit.
+2. Crear el tag. Así:
+    git tag -a v0.1 -m "Añadidos los pasos de SSH" 4a78230
+3. Verificar con "git tag" y "git show-ref --tags".
+4. Hacer git pull origin master.
+5. Enviar con "git push origin --tags".
+6. Actualizar github y en el boton branches aparecerá una nueva opción llamada tags.
+
+BORRAR TAGS.
+1. Dígamos tienes el tag dormido. Tecleas el comando
+git tag -d dormido
+2. haces git pull origin master
+3. envías git push origin --tags, pero esto no borrará el tag.
+El paso que debes hacer es git push origin :refs/tags/dormido.
+4. Con esto has borrado el tag no deseado.
+
+
+MANEJO DE RAMAS EN GITHUB.
+Para enviar las ramas de trabajo a github, primero tienes que crear las ramas localmente, con git branch nombreDeLaRama. Luego, la publicas al repositorio remoto, con git push origin nombreDeLaRama.
+
+Para conocer las ramas que se encuentran tanto en remoto como en local, se utiliza el comando git show-branch --all.
+gitk abre una ventana que muestra visualmente la historia del repositorio. ¿Pero por qué carajo no se trabajó esto antes? Simple, todos los programadores profesionales trabajan desde la consola, la ayuda visual es solo para eso, ver más no trabajar directamente sobre ella.
+
+
+Configurar múltiples colaboradores en un repositorio de GitHub
+Para que tengamos un colaborador en nuestro proyecto, hacemos los siguientes pasos:
+  1. git clone URLDelProyecto.
+  2. Agregar los colaboradores en:
+    * Settings del proyecto.
+    * Collaborators.
+    * Agregar colaboradores por email o username.
+  3. El colaborador debe aceptar la invitación.
+  4. El colaborador ya puede hacer push al proyecto en Github.
+Como dato importante, el flujo de trabajo normal en proyectos de Github, es trabajar en ramas, y una vez se esté de acuerdo con que han terminado se hacen merge a master.
+
+Flujo de trabajo profesional: Haciendo merge de ramas de desarrollo a master
+Para tener en cuenta, los archivos binarios no deberían ser enviados a github, deberían ser completamente ignorados con .gitignore o utilizar gestores de imagenes en internet.
+Para traer ramas de internet al proyecto local se usa el comando: git pull origin nombreDeLaRama.
+
+Flujo de trabajo profesional con Pull requests
+NADIE que sea colaborador debe hacer push a master, para hacer reflejar los cambios, se debe hacer Pull request y un colaborador o el mismo propietario del proyecto, hará code review y posteriormente autorizará hacer el merge, lo usual y lo más profesional es que haya un perfil denominado DevOps, que será encargado de hacer estas revisiones y hacer la vida del programador más fácil. El pull request es un estado intermedio antes de hacer el merge.
+Como buena práctica, se debería tener una rama de staging o development para probar todas las funcionalidades que se estén evaluando, una vez aprobados estos cambios y se está conforme con el producto final, se realiza un merge con la rama master, nuevamente, lo ideal NUNCA es trabajar sobre master, sino sobre las ramas.
+
+
+Utilizando Pull Requests en GitHub
+Ahora, cuando hay varias ramas y se han terminado no se hace un merge a master, sino que se envían las ramas a Github, y en la interfaz de Github aparecerá automáticamente una opción que dice "Compare and Pull request", al abrirlo aparecerá seleccionado la rama master y la rama en la que se trabajó para compararlas y mandarlas a revisión por parte de un miembro del equipo, y este al autorizarlo hará automáticamente el merge con la rama master. Los Pull request permiten comentarios, en ellos podemos escribir la información necesaria para hacer un enfoque en la revisión.
+Ahora, desde el enfoque de quién revisa, el usuario puede aprobarlos, comentarlos o solicitar cambios, dependiendo de las necesidades utilizará alguno de los 3.
+¡IMPORTANTE! El aprobar los cambios no implica que se haga un merge, el merge se tiene que hacer por parte de un miembro del equipo, una vez autorizados los cambios, se oprime el botón "Merge pull request", y con esto todos los cambios irán a la rama master.
+Pero, si todos los colaboradores pueden acceder al botón "Merge pull request", ¿Por qué el propietario no lo hizo sino que asigno un reviewer? Porque es una buena práctica, si se tiene colaboradores se debe asignar un code reviewer, alguien que revise el código en busca de errores para corregirlos antes de enviarlo a la rama master, lo importante es que se respete esta función. Ahora, una vez terminado el pull request se puede eliminar la rama, github ofrecerá esta opción, y en general es buena práctica, de lo contrario se llenará de ramas y es contraproducente.
+
+
+Creando un Fork, contribuyendo a un repositorio
+Cuando no eres un colaborador directo, sino que es un proyecto open source, no puede hacer push o merge, porque no es tu proyecto. Lo que se puede hacer es un fork, hacer los cambios y decirles "quiero colaborar, por favor, revisen este código".
+En los proyectos open source para que te lleguen notificaciones de cuándo se realizan cambios hay que darle clic al botón "watch" y luego darle clic a fork, fork lo que hace es tomar una copia del proyecto y clonarlo, esto solo es posible si el proyecto es público, si el proyecto es privado es imposible saber que el proyecto existe.
+Una vez el proyecto ha sido forkeado, aparecerá una copia en la interfaz del usuario en github, luego, se clona por https o ssh, y se importa en el disco local con "git clone URLDelProyecto". Luego se hace un git commit, git push origin master, pero esto se actualizará en tu repositorio, no en el repositorio oficial. Para hacer el pull request con la rama oficial, se debe crear un pull request, luego se coloca un título, un comentario y luego enviarlo.
+Desde la perspectiva del propietario, es el mismo procedimiento de code review, revisa los cambios y los acepta o no.
+Ahora el proyecto oficial está más adelantado que el mío, desde github es tan fácil como revisar los cambios desde su interfaz visual, hacer un pull request de los cambios y luego un merge, nada del otro mundo, desde consola es lo interesante. se crea un nuevo origen remoto con git remote add nombreRemoto URLDelProyecto, y listo, ya se puede hacer pull del repositorio remoto oficial y luego push de nuestro repositorio remoto a github.
